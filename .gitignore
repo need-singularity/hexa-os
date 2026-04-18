@@ -1,0 +1,8 @@
+.hexa-cache/
+build/
+*.o
+*.a
+*.dylib
+*.so
+.DS_Store
+.claude/

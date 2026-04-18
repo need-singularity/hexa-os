@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "name": "hexa-os policy",
+    "updated": "2026-04-19"
+  },
+  "forbid": [
+    "@impure",
+    "@unchecked",
+    "@raw_syscall"
+  ],
+  "require": [
+    "@nostd"
+  ],
+  "allow_paths": {
+    "@nostd": ["self/os/**"],
+    "@irq": ["self/os/kernel.hexa", "self/os/drv/**"],
+    "@driver": ["self/os/drv/**"]
+  }
+}

@@ -1,0 +1,27 @@
+// self/os/_freestanding_probe.hexa
+//
+// POC #1 — libc-less hexa binary 컴파일 가능 여부 검증.
+// 성공 기준: ldd 에 libc 없음, ELF entry point = hexa main.
+//
+// 실행 전제: hexa-lang P7-9 fixpoint 완료 + @nostd attr 구현.
+// 현재는 skeleton 만 — 컴파일 안 됨.
+
+@nostd
+pub fn _start() -> int {
+    // kernel 진입점. libc __libc_start_main 우회.
+    // bootloader 가 직접 호출.
+    return hexa_main()
+}
+
+@nostd
+fn hexa_main() -> int {
+    // 최소한 write(1, "hello\n", 6) syscall 한 번.
+    // 지금은 placeholder.
+    return 0
+}
+
+// TODO:
+// 1. linker script 작성 (text/data/bss)
+// 2. @nostd linker flag 자동 주입
+// 3. QEMU 부팅 테스트
+// 4. syscall asm intrinsic
