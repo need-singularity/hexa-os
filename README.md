@@ -1,5 +1,7 @@
 # hexa-os
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19703256-blue?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.19703256)
+
 > AI 추론 어플라이언스 OS. law-enforced, self-hosting, unikernel-first.
 
 Linux 대체 목표 아님. **cloud inference appliance** 로 scoped.
