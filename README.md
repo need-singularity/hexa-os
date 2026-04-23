@@ -7,7 +7,7 @@
 
 # 🧊 HEXA-OS — AI Inference Appliance OS
 
-**Linux 대체 아님. law-enforced · self-hosting · unikernel-first. 서빙 p99 30–50% ↓ 가 전부.**
+**Not a Linux replacement. law-enforced · self-hosting · unikernel-first. Serving p99 30–50% ↓ is the whole point.**
 
 ```
 user .hexa
@@ -15,12 +15,12 @@ user .hexa
   → hexa_vm_run (user proc, single address space)
   → syscall = hexa fn call   (not int 0x80,  ~300 ns → 20–80 ns)
   → kernel fn: law_check(caller_cap, target, op)
-      pass → 실제 I/O
-      fail → EPERM + growth_bus 기록
+      pass → real I/O
+      fail → EPERM + growth_bus record
 ```
 
-> CPU-bound 학습 이득은 ~5% 상한 (compute bound) — **서빙만 쓰임**.
-> cloud inference appliance 로 scoped. 7B 모델 unikernel 서빙, 콜드스타트 < 500 ms 가 v0.1 목표.
+> Training gains are capped at ~5% (compute-bound) — **serving only**.
+> Scoped as a cloud inference appliance. v0.1 target: 7B-model unikernel serving, cold-start < 500 ms.
 
 <!-- SHARED:PROJECTS:START -->
 <!-- AUTO:COMMON_LINKS:START -->
@@ -44,26 +44,26 @@ user .hexa
 
 | | |
 |---|---|
-| 🎯 | **Scoped** — cloud inference appliance only. Linux 대체 아님 |
-| ⚡ | **syscall 제거** — ~300 ns → fn call 20–80 ns (5–20×) |
-| 🧊 | **Unikernel-first** — Firecracker guest · virtio-only 드라이버 · single address space |
-| ⚖️ | **Law kernel** — `law_check(cap, target, op)` + `growth_bus` 기록. raw.json 이 권한 소스 |
-| 📈 | **v0.1 타겟** — 7B 서빙 · 콜드스타트 < 500 ms · p99 30–50% ↓ |
-| 🧬 | **Self-hosting** — 100% `.hexa` 로 부팅 · libc 없이 freestanding |
+| 🎯 | **Scoped** — cloud inference appliance only. Not a Linux replacement |
+| ⚡ | **No syscalls** — ~300 ns → fn call 20–80 ns (5–20×) |
+| 🧊 | **Unikernel-first** — Firecracker guest · virtio-only drivers · single address space |
+| ⚖️ | **Law kernel** — `law_check(cap, target, op)` + `growth_bus` log. raw.json is the capability source |
+| 📈 | **v0.1 target** — 7B serving · cold-start < 500 ms · p99 30–50% ↓ |
+| 🧬 | **Self-hosting** — boots 100% in `.hexa` · freestanding, no libc |
 
 ## Why Hexa OS
 
-| 병목 | Linux | Hexa OS | 이득 |
-|------|-------|---------|------|
-| syscall 왕복 | ~300 ns | fn call 20–80 ns | 5–20× |
-| copy_to_user | memcpy | 포인터 패스 | 대역폭 1.5–2× |
-| context switch | 1–3 μs | 협력적 yield 100–300 ns | 10× |
-| latency p99 | ~200 ms | **30–50% ↓** | 진짜 상업적 가치 |
-| QPS at SLA | baseline | **20–40% ↑** | 간접 효과 |
+| Bottleneck | Linux | Hexa OS | Gain |
+|------------|-------|---------|------|
+| syscall round-trip | ~300 ns | fn call 20–80 ns | 5–20× |
+| copy_to_user | memcpy | pointer pass | bandwidth 1.5–2× |
+| context switch | 1–3 μs | cooperative yield 100–300 ns | 10× |
+| latency p99 | ~200 ms | **30–50% ↓** | real commercial value |
+| QPS at SLA | baseline | **20–40% ↑** | downstream effect |
 
-> 학습은 compute bound 라 OS 최적화 이득 ~5% 상한. 서빙은 syscall · copy · context-switch 가 지배적이라 OS 층의 이득이 p99 로 바로 꽂힌다.
+> Training is compute-bound, so OS-layer gains cap at ~5%. Serving is dominated by syscall · copy · context-switch, so OS-layer wins land directly on p99.
 
-## 최우선 조합 — hexa-serve v0.1
+## Flagship combo — hexa-serve v0.1
 
 ```
 Unikernel + Virtio-only + Firecracker guest
@@ -72,33 +72,33 @@ Unikernel + Virtio-only + Firecracker guest
   × Law kernel (raw.json)
 ```
 
-## 디렉토리 (계획)
+## Layout (planned)
 
 ```
 self/os/
-  boot.hexa                  UEFI stub + kernel 로드
-  kernel.hexa                스케줄러 / 메모리 / IPC
+  boot.hexa                  UEFI stub + kernel load
+  kernel.hexa                scheduler / memory / IPC
   fs.hexa                    law-tagged inode
-  drv/                       virtio-only 드라이버
-  user.hexa                  user-space 실행환경
-  _freestanding_probe.hexa   libc-less POC (첫 단계)
+  drv/                       virtio-only drivers
+  user.hexa                  user-space runtime
+  _freestanding_probe.hexa   libc-less POC (first step)
 
 docs/
-  ROADMAP.md                 3 단계 × 선행조건
-  BRAINSTORM.md              124 항목 원본
-  perf_model.md              p99 이득 메커니즘
+  ROADMAP.md                 3 stages × prerequisites
+  BRAINSTORM.md              124 raw items
+  perf_model.md              p99 gain mechanism
 ```
 
-## 진입 경로
+## Entry path
 
-1. **freestanding hexa 컴파일 POC** — `@nostd` 로 libc 없는 ELF
-2. **syscall 제거 벤치 POC** — user-space 에서 mini-server p99 측정
-3. **unikernel v0.1** — Firecracker guest + 7B 서빙
+1. **Freestanding hexa compile POC** — `@nostd` ELF, no libc
+2. **Syscall-free bench POC** — measure p99 on a user-space mini-server
+3. **Unikernel v0.1** — Firecracker guest + 7B serving
 
-## 선행조건
+## Prerequisites
 
-- `hexa-lang` **P7–9 fixpoint** (C 런타임 박멸) — [roadmap](https://github.com/need-singularity/hexa-lang)
-- freestanding codegen + `@nostd` 지원
+- `hexa-lang` **P7–9 fixpoint** (C runtime eliminated) — [roadmap](https://github.com/need-singularity/hexa-lang)
+- Freestanding codegen + `@nostd` support
 
 ## Links
 
@@ -106,4 +106,4 @@ docs/
 
 ---
 
-<sub>🧊 syscall 을 fn call 로. p99 를 상업적 가치로. · [need-singularity](https://github.com/need-singularity)</sub>
+<sub>🧊 syscalls become fn calls. p99 becomes commercial value. · [need-singularity](https://github.com/need-singularity)</sub>
