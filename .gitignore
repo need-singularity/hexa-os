@@ -6,3 +6,8 @@ build/
 *.so
 .DS_Store
 .claude/
+
+# .workspace machine-local SSOT (mk2 schema, NEVER github push) — added 2026-05-02
+.workspace
+.workspace.*
+.workspace.lock

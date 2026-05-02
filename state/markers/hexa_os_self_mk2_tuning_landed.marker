@@ -1,0 +1,143 @@
+{
+  "schema": "hexa-os/markers/self_mk2_tuning_landed/1",
+  "title": "hexa-os self/ tree mk2 tuning — Phase 1-4 plan + handoff + marker landed",
+  "completion_iso": "2026-05-02",
+  "user_directive": [
+    "hexa-os mk2 tuning",
+    "Phase 1-4: 도메인 분석 + .roadmap.<도메인> + raw 270 triplet plan + handoff + marker",
+    "마이그레이션 금지 / additive only / BR-NO-USER-VERBATIM / $0 / destructive 0 / cap 45min",
+    "ω-cycle + silent-land marker + AI-native + raw 270/271/272/273 + BR-NO-USER-VERBATIM + friendly preset"
+  ],
+  "land_mode": "additive-only (raw 273)",
+  "files_added": [
+    {
+      "path": ".roadmap.hexa_os_self_mk2_tuning",
+      "sha256": "f691c6f5a69333fa32efe37f14b325f599db5cdfbe1fcb78fa8a669cf6d44f7f",
+      "schema": "mk2 (one JSON object per line after header)",
+      "shape": "1 header + 4 phases + 7 raw#10 caveats"
+    },
+    {
+      "path": "docs/hexa_os_self_mk2_tuning_landed_2026_05_02.ai.md",
+      "sha256": "673438f062e659fef4e9c2471107264dbb94a6643d55d86a879ed082c67064fd",
+      "schema": "hexa-os/docs/self_mk2_tuning_landed/ai-native/1",
+      "audience": "AI"
+    },
+    {
+      "path": "state/markers/hexa_os_self_mk2_tuning_landed.marker",
+      "sha256": "self-referential",
+      "schema": "hexa-os/markers/self_mk2_tuning_landed/1"
+    }
+  ],
+  "files_preserved_byte_identical": [
+    {
+      "path": "self/os/_freestanding_probe.hexa",
+      "sha256": "94060f9b8d22abb2815bda82a993a51de99752d96bcbc7ceaad094c71dccf6f2",
+      "loc": 31,
+      "rationale": "additive-only mandate (raw 273) — pre-existing skeleton untouched"
+    },
+    {
+      "path": ".own-rules.json",
+      "sha256": "c9c09859f3a41c63b510fe4b244f436147040c9546300e2bc0d8885bc994073a",
+      "rules": "HOS1..HOS5 (freestanding, no .c, law invariant, single addr space, virtio-only)"
+    },
+    {
+      "path": "project.hexa",
+      "sha256": "39e5e95c5090e9123f8b2a36bc6015518bb27379f3a408c84482c97f7dc6f6e8",
+      "raw272_debt": "line 17 contains '/Users/<user>/core/hexa-lang' literal — flagged, NOT modified per additive-only mandate"
+    }
+  ],
+  "domain_analysis": {
+    "repo_size_disk": "364K",
+    "source_files_hexa": 1,
+    "source_files_path": "self/os/_freestanding_probe.hexa (31 LOC, skeleton)",
+    "design_docs_md": 4,
+    "l1_rules_count": 5,
+    "upstream_pin": "hexa-lang .raw via .raw-ref (pinned-hash placeholder, never synced)",
+    "current_phase": "design + brainstorm",
+    "compile_status": "nothing compiles (P7-9 blocker; probe is placeholder)"
+  },
+  "raw_conformance": {
+    "raw_270_core_module_split": {
+      "status": "scaffolded_planned",
+      "note": "self/core/ + self/modules/ to be mkdir'd in phase.1; first split lands in phase.2 (boot module pair)"
+    },
+    "raw_271_readme_ai_native": {
+      "status": "this_doc_conformant",
+      "note": "this handoff has frontmatter (schema, last_updated, ssot) + 4 sections (TL;DR, architecture map, file index, raw#10 caveats); future per-group READMEs to follow same shape"
+    },
+    "raw_272_no_user_verbatim": {
+      "status": "audit_complete",
+      "violations_found": 1,
+      "violation_path": "project.hexa:17",
+      "action": "flagged as pre-existing debt; NOT modified per additive-only"
+    },
+    "raw_273_additive_only": {
+      "status": "honored",
+      "destructive_changes": 0,
+      "files_modified": 0,
+      "files_deleted": 0
+    }
+  },
+  "phases": {
+    "phase_1": {
+      "name": "restore + scaffold",
+      "duration_estimate": "1-2 days",
+      "cost_usd": 0,
+      "blocker": "user decision on .own / .roadmap working-tree deletes (restore vs rewrite)"
+    },
+    "phase_2": {
+      "name": "first module pair (boot)",
+      "duration_estimate": "3-5 days",
+      "cost_usd": 0,
+      "blocker": "hexa-lang P7-9 fixpoint (upstream)"
+    },
+    "phase_3": {
+      "name": "law_kernel module pair (HOS3)",
+      "duration_estimate": "1-2 weeks",
+      "cost_usd": 0,
+      "blocker": "hexa-lang P7-9 + 3-layer law enforcement wire-up (#38+39+29+4)"
+    },
+    "phase_4": {
+      "name": "handoff + marker (this land)",
+      "duration_estimate": "~1 hour",
+      "cost_usd": 0,
+      "status": "complete"
+    }
+  },
+  "blockers_upstream": [
+    "hexa-lang P7-9 fixpoint (runtime.c eradication) — blocks phase.2 + phase.3 compilation",
+    "hexa-lang 3-layer law enforcement wire-up (#38+39+29+4) — blocks phase.3 law_check fn substitution"
+  ],
+  "blockers_local": [
+    "uncommitted working-tree deletes (.own, .roadmap) — user must decide restore (preserve L1 inheritance) vs rewrite (mk2-shaped) before phase.1 entry"
+  ],
+  "raw10_caveats": [
+    "hexa-os has 1 .hexa file total (skeleton). 'self mk2 tuning' = convention adoption + scaffolding contract, NOT existing code refactor.",
+    "All concrete kernel work BLOCKED by hexa-lang P7-9 fixpoint. phase.2-3 can lay scaffolding + signatures but cannot compile/run until upstream unblocks.",
+    "Working tree has uncommitted deletes (.own, .roadmap) and mods (.gitignore). This session does NOT commit per session policy.",
+    "raw 272 audit found '/Users/<name>/' literal at project.hexa:17. Pre-existing debt; additive-only honors by not modifying.",
+    "Token 'mk2' is overloaded: hexa-os 'self mk2 tuning' = local convention adoption; anima/hive 'mk2 schema' = JSON-line .roadmap file format. Two senses share the token.",
+    "Lint dependency on hive/tool/ai_native_module_readme_lint.hexa is cross-repo. hexa-os does not vendor a copy.",
+    "Domain .roadmap.hexa_os_self_mk2_tuning is mk2-schema (JSON line); free-form .roadmap (deleted in working tree) was markdown checkpoint diary. Coexistence intended."
+  ],
+  "next_step": [
+    "User decision: A=git restore .own .roadmap (preserve L1 inheritance) / B=rewrite as mk2-shaped",
+    ".raw-ref first-sync (pinned-hash currently TO_BE_FILLED_ON_FIRST_SYNC)",
+    "project.hexa raw 272 cleanup (line 17 literal path) — backlog (additive-only forbids touching this land)",
+    "hexa-lang P7-9 watch — phase.2 unblock signal",
+    "state/proposals/inventory.json append (completion entry deferred)"
+  ],
+  "cost_usd": 0,
+  "destructive_changes": 0,
+  "wallclock_actual_minutes": 25,
+  "wallclock_cap_minutes": 45,
+  "session_policy": [
+    "ω-cycle 6-step honored",
+    "silent-land marker emitted (this file)",
+    "AI-native handoff (raws_conformant=[9,10,270,271,272,273])",
+    "BR-NO-USER-VERBATIM applied (no /Users/<name>/ literals or @-handles in any new file)",
+    "friendly preset (analogy + ASCII map + 7-element checklist + file index)",
+    "additive-only (no migration, no in-place rewrite)",
+    "$0 mac-local (no GPU, no LLM, no pod)"
+  ]
+}

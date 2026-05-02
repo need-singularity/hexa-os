@@ -1,0 +1,230 @@
+{
+  "schema": "hexa-os/markers/mk2_rewrite_landed/1",
+  "title": "hexa-os mk2-rewrite — 3-domain SSOT spawn (kernel + boot + design) + handoff + marker landed",
+  "completion_iso": "2026-05-03",
+  "predecessor": {
+    "marker": "state/markers/hexa_os_self_mk2_tuning_landed.marker",
+    "completion_iso": "2026-05-02",
+    "relation": "meta-parent — this land spawns 3 sibling .roadmap.<domain> SSOTs from predecessor umbrella"
+  },
+  "user_directive": [
+    "hexa-os mk2-rewrite (restore X — rewrite path chosen by user)",
+    "mk2 .roadmap.<domain> 신규 작성 (HOS L1 rules 5개 + design phase 측 도메인 분석 기반)",
+    "candidates: kernel + boot + design — all 3 written this land",
+    "마이그레이션 금지 / additive only / BR-NO-USER-VERBATIM / $0 / destructive 0 / cap 60min",
+    "사용자 deleted file (.own, .roadmap) 측 restore 절대 금지",
+    "raw 272 violation backlog (project.hexa:17) 측 in-place fix X (additive only)",
+    "ω-cycle + silent-land marker + AI-native + raw 270/271/272/273 + BR-NO-USER-VERBATIM + friendly preset"
+  ],
+  "land_mode": "additive-only (raw 273)",
+  "files_added": [
+    {
+      "path": ".roadmap.hexa_os_kernel",
+      "sha256": "eba2a03e92639745feb7e1084fb75e3f95c1eac9732a0e4a76434059e3d2a349",
+      "schema": "mk2 (one JSON object per line after header comment)",
+      "shape": "1 header + 3 phases + 7 raw#10 caveats + 3 cross_links (16 lines total)",
+      "domain": "HOS L1 5-rule (HOS1..HOS5) compliance scaffold + future law_kernel pair contract",
+      "conditions_met_at_land": "4/7 (cond.2,4,5,6 — vacuously satisfied or probe preserved; cond.1,3,7 unmet pending upstream)"
+    },
+    {
+      "path": ".roadmap.hexa_os_boot",
+      "sha256": "20e2b18000865fdbb2e382218b26f3d30428e3328750ef1fa4cc7af50d1212fe",
+      "schema": "mk2 (one JSON object per line after header comment)",
+      "shape": "1 header + 3 phases + 7 raw#10 caveats + 3 cross_links (16 lines total)",
+      "domain": "first raw 270 module pair candidate (boot: UEFI/Multiboot2/Firecracker stubs + linker)",
+      "conditions_met_at_land": "1/8 (cond.8 probe preserved; cond.1-7 unmet pending phase.1 execution + upstream)"
+    },
+    {
+      "path": ".roadmap.hexa_os_design",
+      "sha256": "e6507cd66af8bdaac1f719276ce1535a671f9b2b76a27af419f111c284c83b06",
+      "schema": "mk2 (one JSON object per line after header comment)",
+      "shape": "1 header + 3 phases + 7 raw#10 caveats + 3 cross_links (16 lines total)",
+      "domain": "organize-only SSOT for 5 design docs (BRAINSTORM/DEPLOYMENT/HEXA_SERVE_V01/PERF_P99/ROADMAP)",
+      "conditions_met_at_land": "8/8 (all conditions PASS — organize-only domain has no upstream deps)"
+    },
+    {
+      "path": "docs/hexa_os_mk2_rewrite_landed_2026_05_03.ai.md",
+      "sha256": "d61b1bf979bc5b2d1c9ac6cb999c0537b882ff9ff49183f7c36699e088cd9832",
+      "schema": "hexa-os/docs/mk2_rewrite_landed/ai-native/1",
+      "audience": "AI",
+      "frontmatter_sections": ["TL;DR", "Architecture map (analogy + ASCII)", "Domain split rationale", "raw 270/271/272/273 conformance per file", "File index", "raw#10 caveats", "Cost + destructive change accounting", "Next-cycle recommendations"]
+    },
+    {
+      "path": "state/markers/hexa_os_mk2_rewrite_landed.marker",
+      "sha256": "self-referential",
+      "schema": "hexa-os/markers/mk2_rewrite_landed/1"
+    }
+  ],
+  "files_preserved_byte_identical": [
+    {
+      "path": "self/os/_freestanding_probe.hexa",
+      "sha256": "94060f9b8d22abb2815bda82a993a51de99752d96bcbc7ceaad094c71dccf6f2",
+      "loc": 31,
+      "rationale": "additive-only mandate (raw 273) — pre-existing skeleton untouched"
+    },
+    {
+      "path": ".own-rules.json",
+      "sha256_unchanged": true,
+      "rules": "HOS1..HOS5 (freestanding, no .c, law invariant, single addr space, virtio-only)"
+    },
+    {
+      "path": "project.hexa",
+      "sha256_unchanged": true,
+      "raw272_debt": "line 17 contains '/Users/<user>/core/hexa-lang' literal — flagged in predecessor roadmap cond.7, NOT modified per additive-only mandate"
+    },
+    {
+      "path": ".roadmap.hexa_os_self_mk2_tuning",
+      "sha256": "f691c6f5a69333fa32efe37f14b325f599db5cdfbe1fcb78fa8a669cf6d44f7f",
+      "rationale": "predecessor meta-parent — this land spawns siblings, does not modify predecessor"
+    },
+    {
+      "path": "docs/BRAINSTORM.md",
+      "sha256_unchanged": true,
+      "rationale": "design.cond.1 — design phase doc preserved; this land registers it in .roadmap.hexa_os_design without modification"
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "sha256_unchanged": true,
+      "rationale": "design.cond.2"
+    },
+    {
+      "path": "docs/HEXA_SERVE_V01.md",
+      "sha256_unchanged": true,
+      "rationale": "design.cond.3"
+    },
+    {
+      "path": "docs/PERF_P99.md",
+      "sha256_unchanged": true,
+      "rationale": "design.cond.4"
+    },
+    {
+      "path": "ROADMAP.md",
+      "sha256_unchanged": true,
+      "rationale": "design.cond.5"
+    },
+    {
+      "path": "docs/hexa_os_self_mk2_tuning_landed_2026_05_02.ai.md",
+      "sha256_unchanged": true,
+      "rationale": "predecessor handoff doc — preserved"
+    },
+    {
+      "path": "state/markers/hexa_os_self_mk2_tuning_landed.marker",
+      "sha256_unchanged": true,
+      "rationale": "predecessor marker — preserved"
+    }
+  ],
+  "domain_split_rationale": {
+    "kernel": {
+      "scope": "HOS L1 5-rule (HOS1..HOS5) compliance scaffold + future law_kernel pair contract",
+      "maturity": "scaffold (4/7 cond met, 3/7 unmet pending upstream P7-9 + 3-layer law)",
+      "primary_blocker": "hexa-lang P7-9 + 3-layer law enforcement (#38+#39+#29+#4)"
+    },
+    "boot": {
+      "scope": "first raw 270 module pair candidate (boot: UEFI/Multiboot2/Firecracker stubs + linker)",
+      "maturity": "plan-only (1/8 cond met — probe preserved only; 7/8 unmet pending phase.1 execution + upstream UEFI ABI + asm! macro)",
+      "primary_blocker": "hexa-lang P7-9 + UEFI ABI variant + ARM64/x86_64 asm! macro"
+    },
+    "design": {
+      "scope": "organize-only SSOT for 5 design docs (BRAINSTORM/DEPLOYMENT/HEXA_SERVE_V01/PERF_P99/ROADMAP)",
+      "maturity": "content-complete (8/8 cond met — organize-only, no upstream deps)",
+      "primary_blocker": "none"
+    }
+  },
+  "domains_NOT_spawned_this_land": [
+    {
+      "candidate": ".roadmap.hexa_os_serving",
+      "rationale": "deferred per .roadmap.hexa_os_design design.blk.3 + phase.3 — covers HEXA_SERVE_V01 phases 3-5 (Inference + Serving + Bench), should spawn after boot phase.2 completes"
+    },
+    {
+      "candidate": ".roadmap.hexa_os_microkernel",
+      "rationale": "ROADMAP.md Stage 2 (1-2 year horizon) — premature to spawn before Stage 1 (Unikernel) demonstrably works"
+    }
+  ],
+  "raw_conformance": {
+    "raw_270_core_module_split": {
+      "status": "tracked_in_boot_domain",
+      "note": ".roadmap.hexa_os_boot cond.1 enforces; .roadmap.hexa_os_kernel cond.7 cross-tracks (delegates to boot)"
+    },
+    "raw_271_readme_ai_native": {
+      "status": "this_handoff_conformant",
+      "note": "this handoff has frontmatter (schema, last_updated, ssot, audience, raws_conformant) + 4+ sections (TL;DR, Architecture map, Domain split, raw conformance table, File index, raw#10 caveats, Cost accounting, Next-cycle recommendations); future per-group READMEs (boot.cond.2) will follow same shape"
+    },
+    "raw_272_no_user_verbatim": {
+      "status": "audit_complete",
+      "violations_in_new_files": 0,
+      "violations_in_pre_existing_files": 1,
+      "violation_path": "project.hexa:17 (pre-existing, flagged in predecessor)",
+      "action": "additive-only forbids touching pre-existing file"
+    },
+    "raw_273_additive_only": {
+      "status": "honored",
+      "destructive_changes": 0,
+      "files_modified": 0,
+      "files_deleted": 0,
+      "files_added": 5
+    }
+  },
+  "phases": {
+    "phase_1_kernel": {
+      "name": "HOS L1 lint scaffold (additive only)",
+      "duration_estimate": "1 day",
+      "cost_usd": 0,
+      "blocker": "none for scaffold; tool/hos_lint.hexa skeleton can be authored without upstream"
+    },
+    "phase_1_boot": {
+      "name": "boot pair scaffold (additive only, NO compile)",
+      "duration_estimate": "1-2 days",
+      "cost_usd": 0,
+      "blocker": "none for scaffold; mkdir + READMEs + fn signatures can be authored without upstream"
+    },
+    "phase_1_design": {
+      "name": "design SSOT registration (this land)",
+      "duration_estimate": "1 hour",
+      "cost_usd": 0,
+      "status": "complete (8/8 cond met at land)"
+    }
+  },
+  "blockers_upstream": [
+    "hexa-lang P7-9 fixpoint (runtime.c eradication) — blocks kernel.cond.1 + boot.cond.3 + boot.cond.5 + boot.cond.6 actual compile",
+    "hexa-lang 3-layer law enforcement wire-up (#38+#39+#29+#4) — blocks kernel.cond.3 (HOS3 law_check dispatch)",
+    "hexa-lang ARM64+x86_64 codegen UEFI ABI variant + asm! macro — blocks boot.cond.3 + boot.cond.4"
+  ],
+  "blockers_local": [
+    "uncommitted working-tree deletes (.own, .roadmap) — user declined restore (mk2-rewrite path chosen); deletions still need commit-or-discard decision in a separate user-driven commit",
+    "linker script self/os/linker.ld authoring — depends on @nostd codegen output format spec from upstream"
+  ],
+  "raw10_caveats": [
+    "Plan-only at land. Kernel + boot domains are scaffolding contracts only. No self/core/ or self/modules/ dirs created yet. No boot stubs authored. Phase.1 of each domain is the next concrete step but requires user go-ahead per session policy.",
+    "Upstream-blocked. All concrete kernel + boot work blocks on hexa-lang P7-9 fixpoint plus 3-layer law enforcement plus UEFI ABI variant + asm! macro support. None have ETAs tracked.",
+    "rewrite, not restore. User directive: deleted .own and .roadmap (working tree) NOT restored. mk2-rewrite path spawns per-domain SSOT files. Deleted files remain as working-tree deletions until user decides next.",
+    "raw 272 pre-existing debt unchanged. project.hexa:17 literal flagged in predecessor roadmap cond.7; additive-only mandate forbids touching it. Tracked, not fixed.",
+    "Domain count is 3 not 4. No .roadmap.hexa_os_serving spawned (deferred). HEXA_SERVE_V01 phases 3-5 (Inference + Serving + Bench) need future serving domain spawn.",
+    "Cross-repo lint dependency. hive/tool/ai_native_module_readme_lint.hexa is referenced by boot.cond.2 verifier. hexa-os does not vendor a copy. If hive moves, lint degrades to manual README inspection.",
+    "Token mk2 is overloaded. hexa-os mk2-rewrite = adopt mk2-shaped per-domain .roadmap.<domain> format AND spawn 3 sibling roadmaps. anima/hive mk2 schema = JSON-line file format used. Two senses share token; both apply simultaneously."
+  ],
+  "next_step": [
+    "User decision on .own / .roadmap working-tree deletions (commit-or-discard, since mk2-rewrite path established)",
+    "Phase.1 of .roadmap.hexa_os_design is met at land — Phase.2 (BRAINSTORM_TRIAGE.md + DEPLOYMENT_PROVISION_NOTES.md) can land additively",
+    "Phase.1 of .roadmap.hexa_os_kernel: author tool/hos_lint.hexa skeleton (selftest mode only)",
+    "Phase.1 of .roadmap.hexa_os_boot: scaffold (mkdir + READMEs + uefi_stub.hexa fn signatures)",
+    ".raw-ref first-sync (pinned-hash currently TO_BE_FILLED_ON_FIRST_SYNC) — carried over from predecessor",
+    "project.hexa raw 272 cleanup (line 17 literal path) — backlog (additive-only forbids touching this land)",
+    "hexa-lang P7-9 watch — unblocks kernel + boot phase.2 actual compile attempts",
+    "Future .roadmap.hexa_os_serving spawn when boot phase.2 completes"
+  ],
+  "cost_usd": 0,
+  "destructive_changes": 0,
+  "wallclock_actual_minutes": 30,
+  "wallclock_cap_minutes": 60,
+  "session_policy": [
+    "ω-cycle 6-step honored",
+    "silent-land marker emitted (this file)",
+    "AI-native handoff (raws_conformant=[9,10,270,271,272,273])",
+    "BR-NO-USER-VERBATIM applied (no /Users/<name>/ literals or @-handles in any new file; pre-existing project.hexa:17 untouched)",
+    "friendly preset (analogy + ASCII map + 8-section checklist + file index)",
+    "additive-only (no migration, no in-place rewrite, no restore of deleted files)",
+    "$0 mac-local (no GPU, no LLM, no pod)",
+    "raw 270/271/272/273 quartet conformant",
+    "rewrite path chosen over restore per user directive"
+  ]
+}

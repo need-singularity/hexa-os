@@ -1,0 +1,20 @@
+{
+  "stack": [
+    {
+      "command": "roi",
+      "seed": ""
+    },
+    {
+      "command": "go",
+      "seed": ""
+    },
+    {
+      "command": "roi",
+      "seed": ""
+    },
+    {
+      "command": "go",
+      "seed": ""
+    }
+  ]
+}
