@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use HEXA-OS in academic work, please cite as below."
+title: "HEXA-OS: AI Inference Appliance OS (HEXA family, unikernel-first)"
+abstract: |
+  HEXA-OS is a law-enforced, self-hosting, unikernel-first operating
+  system designed as an AI inference appliance. It targets a 30–50%
+  reduction in serving p99 latency relative to general-purpose Linux
+  on equivalent hardware. HEXA-OS depends on HEXA-LANG passes P7–9
+  for self-hosted toolchain provenance.
+authors:
+  - name: dancinlife
+    affiliation: dancinlab
+license: MIT
+repository-code: "https://github.com/dancinlab/hexa-os"
+url: "https://github.com/dancinlab/hexa-os"
+version: "0.1.0"
+date-released: "2026-04-23"
+doi: "10.5281/zenodo.19703255"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.19703255"
+    description: "Concept DOI (always resolves to the latest version)"
+  - type: doi
+    value: "10.5281/zenodo.19703256"
+    description: "Version-specific DOI for v0.1.0"
+keywords:
+  - operating-system
+  - unikernel
+  - firecracker
+  - ai-inference
+  - serving-latency
+  - hexa-family
+  - self-hosted
+references:
+  - type: software
+    title: "HEXA-LANG (self-hosted programming language, dependency P7-9)"
+    url: "https://github.com/dancinlab/hexa-lang"
