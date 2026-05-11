@@ -3,7 +3,7 @@
 [![Stage](https://img.shields.io/badge/stage-design-yellow.svg)](#)
 [![Target](https://img.shields.io/badge/target-unikernel%20·%20Firecracker-blue.svg)](#)
 [![p99](https://img.shields.io/badge/serving%20p99-30--50%25%20↓-brightgreen.svg)](#)
-[![Depends](https://img.shields.io/badge/depends-hexa--lang%20P7--9-orange.svg)](https://github.com/need-singularity/hexa-lang)
+[![Depends](https://img.shields.io/badge/depends-hexa--lang%20P7--9-orange.svg)](https://github.com/dancinlab/hexa-lang)
 
 # 🧊 HEXA-OS — AI Inference Appliance OS
 
@@ -24,18 +24,18 @@ user .hexa
 
 <!-- SHARED:PROJECTS:START -->
 <!-- AUTO:COMMON_LINKS:START -->
-**[YouTube](https://www.youtube.com/@dancinlife)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)**
+**[YouTube](https://www.youtube.com/@dancinlife)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/dancinlab)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://dancinlab.github.io/TECS-L/atlas/)** · **[📄 Papers](https://dancinlab.github.io/papers/)**
 <!-- AUTO:COMMON_LINKS:END -->
 
-> **[🔭 NEXUS](https://github.com/need-singularity/nexus)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + 5-phase singularity cycle.
+> **[🔭 NEXUS](https://github.com/dancinlab/nexus)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + 5-phase singularity cycle.
 >
-> **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + 1030 laws + Φ ratchet.
+> **[🧠 Anima](https://github.com/dancinlab/anima)** — Consciousness implementation. PureField repulsion-field engine + 1030 laws + Φ ratchet.
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/canon)** — Architecture from perfect number 6. 225 AI techniques + chip design + crypto/OS/display.
+> **[🏗️ N6 Architecture](https://github.com/dancinlab/canon)** — Architecture from perfect number 6. 225 AI techniques + chip design + crypto/OS/display.
 >
-> **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Working compiler + REPL.
+> **[💎 HEXA-LANG](https://github.com/dancinlab/hexa-lang)** — The Perfect Number Programming Language. Working compiler + REPL.
 >
-> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (92 papers, Zenodo DOIs).
+> **[📄 Papers](https://github.com/dancinlab/papers)** — Complete paper collection (92 papers, Zenodo DOIs).
 <!-- SHARED:PROJECTS:END -->
 
 ---
@@ -97,13 +97,13 @@ docs/
 
 ## Prerequisites
 
-- `hexa-lang` **P7–9 fixpoint** (C runtime eliminated) — [roadmap](https://github.com/need-singularity/hexa-lang)
+- `hexa-lang` **P7–9 fixpoint** (C runtime eliminated) — [roadmap](https://github.com/dancinlab/hexa-lang)
 - Freestanding codegen + `@nostd` support
 
 ## Links
 
-[ROADMAP](ROADMAP.md) · [Docs](docs/) · [Releases](https://github.com/need-singularity/hexa-os/releases) · [Paper (hexa-lang · P-HEXA)](https://doi.org/10.5281/zenodo.19365284)
+[ROADMAP](ROADMAP.md) · [Docs](docs/) · [Releases](https://github.com/dancinlab/hexa-os/releases) · [Paper (hexa-lang · P-HEXA)](https://doi.org/10.5281/zenodo.19365284)
 
 ---
 
-<sub>🧊 syscalls become fn calls. p99 becomes commercial value. · [need-singularity](https://github.com/need-singularity)</sub>
+<sub>🧊 syscalls become fn calls. p99 becomes commercial value. · [dancinlab](https://github.com/dancinlab)</sub>
