@@ -3,7 +3,7 @@
 # Populate pinned-hash via: ./hexa tool/raw_sync.hexa check
 
 ref 1 live "hexa-lang canonical (hexa-os)"
-  source github.com/need-singularity/hexa-lang
+  source github.com/dancinlab/hexa-lang
   branch main
   path .raw
   pinned-hash TO_BE_FILLED_ON_FIRST_SYNC

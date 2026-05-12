@@ -8,7 +8,10 @@ abstract: |
   on equivalent hardware. HEXA-OS depends on HEXA-LANG passes P7–9
   for self-hosted toolchain provenance.
 authors:
-  - name: dancinlife
+  - family-names: Park
+    given-names: Min Woo
+    alias: dancinlab
+    email: nerve011235@gmail.com
     affiliation: dancinlab
 license: MIT
 repository-code: "https://github.com/dancinlab/hexa-os"
