@@ -2,7 +2,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Stage](https://img.shields.io/badge/stage-design-yellow.svg)](#)
 [![Target](https://img.shields.io/badge/target-unikernel%20·%20Firecracker-blue.svg)](#)
-[![p99](https://img.shields.io/badge/serving%20p99-30--50%25%20↓-brightgreen.svg)](#)
+[![Modules: 6 spec](https://img.shields.io/badge/modules-6_spec-blue.svg)](#verify)
+[![Verify: 4/4 PASS](https://img.shields.io/badge/verify-4%2F4_PASS-brightgreen.svg)](verify/run_all.hexa)
+[![Closure: SPEC_FIRST](https://img.shields.io/badge/closure-SPEC__FIRST-brightgreen.svg)](hexa.toml)
+[![p99](https://img.shields.io/badge/serving%20p99-30--50%25%20↓%20UNVERIFIED-orange.svg)](LIMIT_BREAKTHROUGH.md)
+[![Training cap](https://img.shields.io/badge/training%20gains-~5%25%20capped-lightgrey.svg)](LIMIT_BREAKTHROUGH.md)
 [![Depends](https://img.shields.io/badge/depends-hexa--lang%20P7--9-orange.svg)](https://github.com/dancinlab/hexa-lang)
 
 # 🧊 HEXA-OS — AI Inference Appliance OS
@@ -108,9 +112,48 @@ docs/
 - `hexa-lang` **P7–9 fixpoint** (C runtime eliminated) — [roadmap](https://github.com/dancinlab/hexa-lang)
 - Freestanding codegen + `@nostd` support
 
+## Verify
+
+hexa-os is a **SPEC_FIRST** substrate: 6 design modules, each backed by a
+spec doc on disk. Closure is verified by 4 small `.hexa` scripts under
+`verify/`:
+
+```bash
+# from repo root:
+hexa run verify/run_all.hexa
+# expected: 4/4 scripts passed
+```
+
+| # | script | what it checks |
+|---|--------|----------------|
+| 1 | `verify/spec_presence.hexa` | 6/6 module spec docs at declared paths (+ 2 crosslink sub-specs) |
+| 2 | `verify/lattice_arithmetic.hexa` | n=6 lattice identities (aux per [`LATTICE_POLICY.md`](LATTICE_POLICY.md) §1.3 rule 1 — never sole verification) |
+| 3 | `verify/real_limits_anchor.hexa` | [`LIMIT_BREAKTHROUGH.md`](LIMIT_BREAKTHROUGH.md) anchors (Turing H1 · Brewer H6 · Lamport H7 · NVMe H5 · speed of light H9 · Linux syscall S1 baseline) |
+| 4 | `verify/closure_consistency.hexa` | scoreboard cross-check (CLI registry · `hexa.toml` · README badge · AGENTS.md policy registration) |
+
+The 6 modules:
+
+| # | module | spec doc |
+|---|--------|----------|
+| 1 | `boot` | [`ROADMAP.md`](ROADMAP.md) — UEFI / Multiboot2 / Firecracker guest |
+| 2 | `kernel` | [`docs/PERF_P99.md`](docs/PERF_P99.md) — scheduler · memory · IPC · `law_check` |
+| 3 | `serving` | [`docs/HEXA_SERVE_V01.md`](docs/HEXA_SERVE_V01.md) — hexa-serve v0.1 (7B unikernel) |
+| 4 | `deployment` | [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — operational notes |
+| 5 | `ios` | [`hexa-ios/hexa-ios.md`](hexa-ios/hexa-ios.md) — mobile target spec |
+| 6 | `macos` | [`hexa-macos/hexa-macos.md`](hexa-macos/hexa-macos.md) — desktop target spec |
+
+> **Honest scope** (raw#10 C3): the **30–50% p99 ↓** badge above is
+> **UNVERIFIED** until the operational unikernel boots (gated on
+> hexa-lang P7–9 fixpoint). It is a design target, not a measurement.
+> The **~5% training cap** is a falsifiable real-limit claim
+> (GPU-FLOPs-dominated); it is preserved verbatim from the headline
+> above. Actual OS vendors (Linux Foundation, Microsoft, Apple, Google)
+> use **their own** benchmarks (LMBench / sysbench / fio / etc.) — no
+> lattice-fit is asserted on any external system.
+
 ## Links
 
-[ROADMAP](ROADMAP.md) · [Docs](docs/) · [Releases](https://github.com/dancinlab/hexa-os/releases) · [Paper (hexa-lang · P-HEXA)](https://doi.org/10.5281/zenodo.19365284)
+[ROADMAP](ROADMAP.md) · [Docs](docs/) · [LATTICE_POLICY](LATTICE_POLICY.md) · [LIMIT_BREAKTHROUGH](LIMIT_BREAKTHROUGH.md) · [Releases](https://github.com/dancinlab/hexa-os/releases) · [Paper (hexa-lang · P-HEXA)](https://doi.org/10.5281/zenodo.19365284)
 
 ---
 

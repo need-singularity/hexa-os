@@ -1,0 +1,99 @@
+#!hexa strict
+// hexa-os/verify/spec_presence.hexa — 6-module spec doc presence verifier.
+//
+// Closure anchor #1 for hexa-os (SPEC_FIRST substrate):
+// each of the 6 design modules declared in hexa.toml [modules] and
+// cli/hexa-os.hexa MODULES must resolve to a real spec markdown at
+// the declared path. This is the *honest* closure check for a
+// spec-first repo — file presence, not behavioural promise.
+//
+// Per LATTICE_POLICY §1.3: spec-presence is real engineering verification
+// (files exist on disk); not a lattice tautology.
+
+let HOME = env("HOME")
+let HEXA_OS_ROOT_ENV = env("HEXA_OS_ROOT")
+
+fn shq(s: str) -> str {
+    return "'" + s.replace("'", "'\\''") + "'"
+}
+
+fn _resolve_root() -> str {
+    if HEXA_OS_ROOT_ENV.len() > 0 { return HEXA_OS_ROOT_ENV }
+    let oldpwd = env("OLDPWD")
+    if oldpwd.len() > 0 {
+        let t = exec("[ -f " + shq(oldpwd) + "/hexa.toml ] && echo y || echo n").trim()
+        if t == "y" { return oldpwd }
+    }
+    let pwd = env("PWD")
+    if pwd.len() > 0 {
+        let t = exec("[ -f " + shq(pwd) + "/hexa.toml ] && echo y || echo n").trim()
+        if t == "y" { return pwd }
+    }
+    return HOME + "/core/hexa-os"
+}
+
+fn _file_exists(p: str) -> bool {
+    let r = exec("[ -f " + shq(p) + " ] && echo yes || echo no").trim()
+    return r == "yes"
+}
+
+// 6-module spec registry — must match cli/hexa-os.hexa MODULES and hexa.toml [modules].
+let MODULES = [
+    ["boot",       "ROADMAP.md"],
+    ["kernel",     "docs/PERF_P99.md"],
+    ["serving",    "docs/HEXA_SERVE_V01.md"],
+    ["deployment", "docs/DEPLOYMENT.md"],
+    ["ios",        "hexa-ios/hexa-ios.md"],
+    ["macos",      "hexa-macos/hexa-macos.md"],
+]
+
+// Crosslinks: sub-specs that should also exist (auxiliary, not part of the
+// 6-module count, but tracked for SPEC_FIRST honesty).
+let CROSSLINKS = [
+    ["unified_service", "unified-service/unified-service.md"],
+    ["vt_terminal",     "hexa-macos/vt-6tier-terminal/vt-6tier-terminal.md"],
+]
+
+fn main() {
+    let root = _resolve_root()
+    println("hexa-os/verify/spec_presence — 6-module spec doc presence")
+    println("  root: " + root)
+    println("")
+    let mut ok = 0
+    let mut bad = 0
+    for row in MODULES {
+        let module = row[0]
+        let rel = row[1]
+        let abs_p = root + "/" + rel
+        if _file_exists(abs_p) {
+            println("  [PASS] " + module + " -> " + rel)
+            ok = ok + 1
+        } else {
+            println("  [FAIL] " + module + " -> " + rel + " MISSING (abs: " + abs_p + ")")
+            bad = bad + 1
+        }
+    }
+    println("")
+    println("  module spec docs present: " + str(ok) + " / 6")
+    println("")
+    println("  crosslinks (auxiliary — not part of the 6-module count):")
+    for row in CROSSLINKS {
+        let name = row[0]
+        let rel = row[1]
+        let abs_p = root + "/" + rel
+        if _file_exists(abs_p) {
+            println("    [PASS] " + name + " -> " + rel)
+            ok = ok + 1
+        } else {
+            println("    [FAIL] " + name + " -> " + rel + " MISSING (abs: " + abs_p + ")")
+            bad = bad + 1
+        }
+    }
+    println("")
+    if bad > 0 {
+        println("  failures: " + str(bad))
+        println("__HEXA_OS_SPEC_PRESENCE__ FAIL")
+        exit(1)
+    }
+    println("__HEXA_OS_SPEC_PRESENCE__ PASS")
+}

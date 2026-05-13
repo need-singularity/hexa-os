@@ -1,0 +1,80 @@
+#!hexa strict
+// hexa-os/cli/hexa-os.hexa — 6-module design dispatcher (SPEC_FIRST).
+//
+// hexa-os is a TRAINING-GAINS-CAPPED, SERVING-ONLY AI inference appliance OS.
+// Per README.md headline: "Training gains are capped at ~5% (compute-bound)
+// — serving only." This CLI is a *spec-headline dispatcher*: each module
+// prints its spec doc location. Implementation (unikernel boot + law kernel
+// + virtio drivers) is gated on hexa-lang P7-9 fixpoint (libc-less codegen)
+// — see ROADMAP.md §단계1.
+//
+// 6 design modules — natural fit for n=6 aux self-consistency check
+// (LATTICE_POLICY §1.3 rule 1; aux only, never sole verification):
+//
+//   1. boot          UEFI stub / Multiboot2 / Firecracker guest entry
+//   2. kernel        scheduler · memory · IPC · law_check
+//   3. serving       hexa-serve v0.1 (7B unikernel, p99 30-50% ↓ claim)
+//   4. deployment    OCI runtime · cluster integration · operational notes
+//   5. ios           hexa-ios spec (mobile target, design only)
+//   6. macos         hexa-macos spec + vt-6tier-terminal (desktop target)
+//
+// Crosslinks (out-of-scope of this CLI; spec docs only):
+//   - unified-service/  (serving + deployment + multi-tenant glue spec)
+//   - hexa-macos/vt-6tier-terminal/  (terminal emulator sub-spec)
+
+// 6-module registry — must match hexa.toml [modules] and verify/spec_presence.hexa
+let MODULES = [
+    ["boot",       "ROADMAP.md"],                              // boot stages declared in roadmap §단계1
+    ["kernel",     "docs/PERF_P99.md"],                        // perf model / kernel design
+    ["serving",    "docs/HEXA_SERVE_V01.md"],                  // hexa-serve v0.1 spec
+    ["deployment", "docs/DEPLOYMENT.md"],                      // operational deployment notes
+    ["ios",        "hexa-ios/hexa-ios.md"],                    // mobile target spec
+    ["macos",      "hexa-macos/hexa-macos.md"],                // desktop target spec
+]
+
+fn _print_usage() {
+    println("hexa-os — AI inference appliance OS (SPEC_FIRST · serving-only · training capped ~5%)")
+    println("")
+    println("Usage:")
+    println("  hexa-os <module>      print spec doc path for module")
+    println("  hexa-os --list        list all 6 design modules")
+    println("  hexa-os --help        this message")
+    println("")
+    println("Modules (6):")
+    for row in MODULES {
+        let m = row[0]
+        let path = row[1]
+        println("  " + m + "  ->  " + path)
+    }
+    println("")
+    println("Honest scope: SPEC_FIRST — markdown specs only. Operational unikernel")
+    println("implementation gated on hexa-lang P7-9 fixpoint (ROADMAP §단계1).")
+    println("Training gains capped at ~5% (compute-bound) — SERVING ONLY.")
+}
+
+fn main() {
+    let args = env_args()
+    if args.len() < 2 {
+        _print_usage()
+        return
+    }
+    let a = args[1]
+    if a == "--help" || a == "-h" || a == "help" {
+        _print_usage()
+        return
+    }
+    if a == "--list" || a == "list" {
+        for row in MODULES { println(row[0]) }
+        return
+    }
+    for row in MODULES {
+        if row[0] == a {
+            println("hexa-os module: " + a)
+            println("spec doc:       " + row[1])
+            return
+        }
+    }
+    println("unknown module: " + a)
+    println("run `hexa-os --list` for the 6-module registry")
+    exit(1)
+}

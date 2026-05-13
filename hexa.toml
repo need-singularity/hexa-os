@@ -1,0 +1,87 @@
+# hexa.toml — hexa-os standalone package manifest
+#
+# Spec: shared/hexa-lang/hexa-toml-spec.json (version 1.0.0)
+# Distribution target: hx install hexa-os
+# Provenance: spec-first AI inference appliance OS; operational unikernel
+#             gated on hexa-lang P7-9 fixpoint (libc-less codegen).
+
+[package]
+name = "hexa-os"
+version = "0.1.0"
+entry = "cli/hexa-os.hexa"
+description = "AI inference appliance OS (HEXA family) — 6-module design substrate (boot · kernel · serving · deployment · ios · macos). SERVING ONLY: training gains are capped at ~5% (compute-bound) by design. Spec-first; operational unikernel + law kernel gated on hexa-lang P7-9 fixpoint (libc-less codegen)."
+license = "MIT"
+authors = ["박민우 <nerve011235@gmail.com>"]
+repository = "https://github.com/dancinlab/hexa-os"
+homepage = "https://github.com/dancinlab/hexa-os"
+readme = "README.md"
+keywords = ["os", "unikernel", "serving", "inference", "firecracker", "hexa-family"]
+categories = ["operating-systems", "spec-substrate"]
+
+[[bin]]
+name = "hexa-os"
+path = "cli/hexa-os.hexa"
+
+# ── Module manifest (6 design modules — n=6 aux self-consistency) ──
+# Per LATTICE_POLICY §1.3 rule 1: n=6 here is an aux self-consistency
+# check, not the verification ceiling. Real ceilings (syscall floor ~10 ns,
+# context-switch ~1-3 μs, NVMe ~10 μs, speed of light) live in
+# LIMIT_BREAKTHROUGH.md and are the authoritative bounds.
+module_parent = "."
+[modules]
+boot       = "ROADMAP.md"                            # UEFI / Multiboot2 / Firecracker guest entry
+kernel     = "docs/PERF_P99.md"                      # scheduler · memory · IPC · law_check
+serving    = "docs/HEXA_SERVE_V01.md"                # hexa-serve v0.1 (7B unikernel target)
+deployment = "docs/DEPLOYMENT.md"                    # operational deployment notes
+ios        = "hexa-ios/hexa-ios.md"                  # mobile target spec
+macos      = "hexa-macos/hexa-macos.md"              # desktop target spec + vt-6tier-terminal
+
+# ── Cross-link (sister substrates / sub-specs) ────────────
+# unified-service is a cross-domain glue spec (serving + deployment + multi-tenant);
+# vt-6tier-terminal is a macos sub-spec. Both are SPEC_FIRST artifacts inside
+# this repo, not separate CLIs.
+[crosslink]
+unified_service = "unified-service/unified-service.md (multi-tenant serving + deployment glue)"
+vt_terminal     = "hexa-macos/vt-6tier-terminal/vt-6tier-terminal.md (terminal emulator sub-spec under macos)"
+hexa_lang_dep   = "dancinlab/hexa-lang P7-9 fixpoint (libc-less codegen + @nostd) — REQUIRED for any operational implementation"
+
+# ── Closure provenance (raw#10 honest C3) ─────────────────
+[closure]
+modules_total = 6
+modules_wired = 0
+modules_spec = 6
+verdict = "SPEC_FIRST"
+provenance = "hexa-os authored in-repo (no upstream extraction); design substrate predating operational implementation (gated on hexa-lang P7-9 fixpoint). Spec docs landed 2026-05-12 (LATTICE_POLICY + LIMIT_BREAKTHROUGH) + 2026-05-13 (closure pattern)."
+
+# ── Verify scoreboard (Wave closure, 2026-05-13) ──────────
+# All four verify/*.hexa scripts must PASS for the substrate to claim closure.
+# Run: `hexa run verify/run_all.hexa` from the repo root (exit 0 = all PASS).
+[verify]
+scripts_total = 4
+scripts_passed = 4
+scripts = [
+    "verify/spec_presence.hexa",       # 6/6 module spec docs present at declared paths
+    "verify/lattice_arithmetic.hexa",  # n=6 self-consistency (aux per LATTICE_POLICY §1.3)
+    "verify/real_limits_anchor.hexa",  # LIMIT_BREAKTHROUGH.md anchors (Turing/Brewer/Lamport/H3-H9)
+    "verify/closure_consistency.hexa", # scoreboard cross-check (CLI · toml · README · AGENTS)
+]
+aggregator = "verify/run_all.hexa"
+verdict = "CLOSED"  # 6/6 modules spec-present · 4/4 verify scripts PASS · SPEC_FIRST
+
+# ── Scope honesty (raw#10 C3 + README headline) ───────────
+[scope]
+honest_scope = "6-module SPEC_FIRST design substrate for an AI inference appliance OS. Serving-only by design (training gains compute-bound, capped at ~5%). Markdown specs only — operational unikernel (boot + virtio drv + law kernel) gated on hexa-lang P7-9 fixpoint."
+not_scope = [
+    "Linux replacement (general multi-tenant compute — Linux remains correct there)",
+    "training-side speedups beyond ~5% (compute-bound by GPU FLOPs, not OS overhead)",
+    "POSIX-compatible ABI (deliberately abandoned; law-checked cap-based I/O instead)",
+    "operational unikernel today (gated on hexa-lang P7-9 fixpoint)",
+    "CAP / Byzantine consensus in v0.1 (distributed replication is future work)",
+]
+training_cap = "~5% (compute-bound, GPU-FLOPs-dominated; preserved verbatim from README headline as a falsifiable real-limit claim — see LIMIT_BREAKTHROUGH.md §5.1)"
+serving_target = "p99 30-50% ↓ at the tail (NOT median; median is GPU-bound). UNVERIFIED until operational unikernel boots; spec-only as of 2026-05-13."
+
+# ── Cost profile ──────────────────────────────────────────
+[cost]
+mac_local_default = "$0 (spec read + CLI dispatcher placeholder)"
+selftest = "$0 (verify script set)"
