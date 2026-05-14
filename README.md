@@ -1,15 +1,25 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19703255.svg)](https://doi.org/10.5281/zenodo.19703255)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Stage](https://img.shields.io/badge/stage-design-yellow.svg)](#)
-[![Target](https://img.shields.io/badge/target-unikernel%20·%20Firecracker-blue.svg)](#)
-[![Modules: 6 spec](https://img.shields.io/badge/modules-6_spec-blue.svg)](#verify)
-[![Verify: 4/4 PASS](https://img.shields.io/badge/verify-4%2F4_PASS-brightgreen.svg)](verify/run_all.hexa)
-[![Closure: SPEC_FIRST](https://img.shields.io/badge/closure-SPEC__FIRST-brightgreen.svg)](hexa.toml)
-[![p99](https://img.shields.io/badge/serving%20p99-30--50%25%20↓%20UNVERIFIED-orange.svg)](LIMIT_BREAKTHROUGH.md)
-[![Training cap](https://img.shields.io/badge/training%20gains-~5%25%20capped-lightgrey.svg)](LIMIT_BREAKTHROUGH.md)
-[![Depends](https://img.shields.io/badge/depends-hexa--lang%20P7--9-orange.svg)](https://github.com/dancinlab/hexa-lang)
+<p align="center">
+  <img src="docs/logo.svg" width="140" alt="hexa-os">
+</p>
 
-# 🧊 HEXA-OS — AI Inference Appliance OS
+<h1 align="center">🖥️ hexa-os</h1>
+
+<p align="center"><strong>HEXA-OS Family</strong> — AI inference appliance OS · law-enforced · self-hosting · unikernel-first</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <a href=".github/workflows/lint.yml"><img alt="CI" src="https://github.com/dancinlab/hexa-os/actions/workflows/lint.yml/badge.svg"></a>
+  <img alt="Spec" src="https://img.shields.io/badge/spec-v0.1-success">
+  <img alt="Modules" src="https://img.shields.io/badge/modules-6-informational">
+  <img alt="Verify" src="https://img.shields.io/badge/verify-4%2F4_PASS-informational">
+  <img alt="Closure" src="https://img.shields.io/badge/closure-SPEC__FIRST-informational">
+  <a href="https://doi.org/10.5281/zenodo.19703255"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.19703255.svg"></a>
+  <img alt="Family" src="https://img.shields.io/badge/family-hexa--os%20·%20hexa--ios%20·%20hexa--macos-blueviolet">
+</p>
+
+<p align="center">Operating systems · unikernel · Firecracker · law kernel · syscall-free · p99-first · self-hosting · serving-only</p>
+
+---
 
 **Not a Linux replacement. law-enforced · self-hosting · unikernel-first. Serving p99 30–50% ↓ is the whole point.**
 
@@ -41,6 +51,15 @@ user .hexa
 <!-- SHARED:PROJECTS:END -->
 
 ---
+
+## Status
+
+- v0.1 spec live (design stage) — 6 modules, SPEC_FIRST closure, 4/4 verify scripts PASS
+- 6 modules: `boot` · `kernel` · `serving` · `deployment` · `ios` · `macos`
+- Family substrate: this repo + sibling `hexa-ios/` + `hexa-macos/` placeholders
+- Depends on `hexa-lang` P7–9 fixpoint (C runtime eliminated, `@nostd` freestanding codegen)
+- Operational unikernel UNVERIFIED — design target, not a measurement; **~5% training cap** is the falsifiable real-limit claim
+- DOI 10.5281/zenodo.19703255 (concept release)
 
 ## Install
 
@@ -84,7 +103,27 @@ Unikernel + Virtio-only + Firecracker guest
   × Law kernel (raw.json)
 ```
 
-## Layout (planned)
+## Run
+
+```sh
+# closure verification (the SPEC_FIRST entry point)
+hexa run verify/run_all.hexa            # → 4/4 scripts passed
+
+# individual verify scripts
+hexa run verify/spec_presence.hexa       # 6/6 module spec docs at declared paths
+hexa run verify/lattice_arithmetic.hexa  # n=6 lattice identities (aux check)
+hexa run verify/real_limits_anchor.hexa  # H1/H5/H6/H7/H9/S1 real-limit anchors
+hexa run verify/closure_consistency.hexa # scoreboard cross-check
+
+# inspect spec docs
+ls docs/                                  # PERF_P99 · HEXA_SERVE_V01 · DEPLOYMENT · BRAINSTORM
+cat hexa-ios/hexa-ios.md                  # mobile target spec
+cat hexa-macos/hexa-macos.md              # desktop target spec
+```
+
+Operational `boot` / `kernel` / `serving` invocations are pre-impl (gated on `hexa-lang` P7–9 fixpoint).
+
+## Repo layout
 
 ```
 self/os/
@@ -142,7 +181,6 @@ The 6 modules:
 | 5 | `ios` | [`hexa-ios/hexa-ios.md`](hexa-ios/hexa-ios.md) — mobile target spec |
 | 6 | `macos` | [`hexa-macos/hexa-macos.md`](hexa-macos/hexa-macos.md) — desktop target spec |
 
-> **Honest scope** (raw#10 C3): the **30–50% p99 ↓** badge above is
 > **UNVERIFIED** until the operational unikernel boots (gated on
 > hexa-lang P7–9 fixpoint). It is a design target, not a measurement.
 > The **~5% training cap** is a falsifiable real-limit claim
@@ -155,6 +193,10 @@ The 6 modules:
 
 [ROADMAP](ROADMAP.md) · [Docs](docs/) · [LATTICE_POLICY](LATTICE_POLICY.md) · [LIMIT_BREAKTHROUGH](LIMIT_BREAKTHROUGH.md) · [Releases](https://github.com/dancinlab/hexa-os/releases) · [Paper (hexa-lang · P-HEXA)](https://doi.org/10.5281/zenodo.19365284)
 
+## License
+
+[MIT](LICENSE) — permissive open source.
+
 ---
 
-<sub>🧊 syscalls become fn calls. p99 becomes commercial value. · [dancinlab](https://github.com/dancinlab)</sub>
+<sub>🖥️ syscalls become fn calls. p99 becomes commercial value. · [dancinlab](https://github.com/dancinlab)</sub>
