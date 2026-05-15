@@ -46,7 +46,7 @@
 @I id001 := "hexa-os" :: identity-claim [d=2026-05-14 active]
   kind = "HEXA-OS family — operating systems"
   brief = "HEXA-OS family · operating systems"
-  parent = "dancinlab/echoes"
+  parent = "dancinlab"
 
 @L l1 := "repo-layout" :: structure [active]
   .hexa-attrs -> "file"
