@@ -13,7 +13,6 @@
 // OS vendor "follows the lattice" — they don't, and this script makes
 // no such claim. Linux uses CFS, Windows uses MultiMedia/dispatcher,
 // Apple uses XNU/GCD, Google uses Fuchsia/Zircon — each with their own
-// invariants and benchmarks (LMBench, sysbench, fio, etc.). Per raw#10
 // C3: this is *internal* arithmetic only.
 
 fn _assert(label: str, cond: bool, mut ok: int, mut bad: int) -> [int] {
@@ -34,7 +33,6 @@ fn main() {
     println("  honest framing: 6 design modules organize this repo's spec docs.")
     println("  external OS vendors (Linux Foundation / Microsoft / Apple / Google)")
     println("  use their OWN benchmarks (LMBench / sysbench / fio / etc.) — no")
-    println("  lattice-fit asserted here per raw#10 C3.")
     println("")
 
     let n = 6

@@ -16,7 +16,6 @@ roadmap_entry: hexa_os_self_mk2_tuning
 # hexa-os self/ mk2 tuning — landing handoff
 
 Audience: AI agent reading this cold. Friendly preset = analogy + ASCII map +
-phase checklist + raw#10 caveats + file index. The land mode is **strictly
 additive**; nothing is migrated and nothing is rewritten in place.
 
 ---
@@ -190,7 +189,6 @@ README.ai.md), landed additively, with no user-identifying strings.
 
 ---
 
-## raw#10 caveats (authoritative — see also .roadmap.hexa_os_self_mk2_tuning)
 
 1. hexa-os has **1 .hexa file total** (skeleton). `self mk2 tuning` here is
    convention adoption + scaffolding contract, not refactor. Migration is

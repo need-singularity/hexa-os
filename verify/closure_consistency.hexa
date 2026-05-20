@@ -139,7 +139,6 @@ fn main() {
         bad = bad + 1
     }
 
-    // README must preserve verbatim training-cap headline (raw#10 C3 honesty).
     let readme = root + "/README.md"
     if _file_contains(readme, "Training gains are capped at ~5%") {
         println("  [PASS] README preserves verbatim 'Training gains are capped at ~5%' claim")

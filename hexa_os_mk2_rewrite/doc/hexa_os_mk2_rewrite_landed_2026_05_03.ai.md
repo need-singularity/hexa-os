@@ -20,7 +20,6 @@ predecessor: hexa_os_self_mk2_tuning (2026-05-02)
 # hexa-os mk2-rewrite — landing handoff (3-domain spawn)
 
 Audience: AI agent reading this cold. Friendly preset = analogy + ASCII map +
-phase checklist + raw#10 caveats + file index. The land mode is **strictly
 additive**; the deleted `.own` and `.roadmap` (working tree) are NOT restored
 per user directive (rewrite, not restore).
 
@@ -174,7 +173,6 @@ land does not touch it (additive mandate honors backlog).
 
 ---
 
-## raw#10 caveats (cumulative across all 3 new roadmaps)
 
 1. **Plan-only at land.** Kernel + boot domains are scaffolding contracts
    only. No `self/core/` or `self/modules/` directories created yet. No
